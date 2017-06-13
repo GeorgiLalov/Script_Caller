@@ -6,9 +6,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 #include <unistd.h>
 #include <pthread.h>
+#include "log_write.h"
 
 //! The folder where are the scripts.
 #define SCRIPTS_FOLDER    "scripts/"
@@ -53,6 +53,7 @@ void *phread_start_point(void* fp_argv);
 void create_new_thread(const char *fp_script_name,
                        pthread_t  *fp_pthread_id);
 void monitor_time(const struct tm *fp_time_info);
+void start_monitoring(void);
 
 /* FILE SCOPE FUNCTIONS */
 
@@ -63,6 +64,15 @@ void monitor_time(const struct tm *fp_time_info);
  * @return
  */
 int main(int argc, char *argv[])
+{
+    //Log_Write(1, "%s\n", "Null parameter reseive");
+
+    start_monitoring();
+
+    return 0;
+}
+
+void start_monitoring(void)
 {
     time_t    rawtime;
     struct tm *timeinfo = NULL;
@@ -79,8 +89,6 @@ int main(int argc, char *argv[])
         //! Check for needed call to script.
         monitor_time(timeinfo);
     }
-
-    return 0;
 }
 
 /**

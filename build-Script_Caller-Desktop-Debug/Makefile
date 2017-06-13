@@ -33,7 +33,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = Script_Caller1.0.0
-DISTDIR = /home/lalov/Documents/QtProjects/build-Script_Caller-Desktop-Debug/.tmp/Script_Caller1.0.0
+DISTDIR = /home/lalov/Documents/проекти/Script_Caller/build-Script_Caller-Desktop-Debug/.tmp/Script_Caller1.0.0
 LINK          = g++
 LFLAGS        = 
 LIBS          = $(SUBLIBS) -pthread 
@@ -48,8 +48,12 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../Script_Caller/main.c 
-OBJECTS       = main.o
+SOURCES       = ../Script_Caller/main.c \
+		../Script_Caller/log_write.c \
+		../Script_Caller/time_manager.c 
+OBJECTS       = main.o \
+		log_write.o \
+		time_manager.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/unix.conf \
 		/usr/lib/qt/mkspecs/common/linux.conf \
@@ -171,7 +175,10 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/exceptions.prf \
 		/usr/lib/qt/mkspecs/features/yacc.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
-		../Script_Caller/Script_Caller.pro  ../Script_Caller/main.c
+		../Script_Caller/Script_Caller.pro log_write.h \
+		time_manager.h ../Script_Caller/main.c \
+		../Script_Caller/log_write.c \
+		../Script_Caller/time_manager.c
 QMAKE_TARGET  = Script_Caller
 DESTDIR       = 
 TARGET        = Script_Caller
@@ -471,8 +478,16 @@ compiler_clean:
 
 ####### Compile
 
-main.o: ../Script_Caller/main.c 
+main.o: ../Script_Caller/main.c ../Script_Caller/log_write.h \
+		../Script_Caller/time_manager.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o main.o ../Script_Caller/main.c
+
+log_write.o: ../Script_Caller/log_write.c ../Script_Caller/log_write.h \
+		../Script_Caller/time_manager.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o log_write.o ../Script_Caller/log_write.c
+
+time_manager.o: ../Script_Caller/time_manager.c ../Script_Caller/time_manager.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o time_manager.o ../Script_Caller/time_manager.c
 
 ####### Install
 
