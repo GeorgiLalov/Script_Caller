@@ -50,10 +50,14 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../Script_Caller/main.c \
 		../Script_Caller/log_write.c \
-		../Script_Caller/time_manager.c 
+		../Script_Caller/time_manager.c \
+		../Script_Caller/scripts_file_reader.c \
+		../Script_Caller/scripts_list_management.c 
 OBJECTS       = main.o \
 		log_write.o \
-		time_manager.o
+		time_manager.o \
+		scripts_file_reader.o \
+		scripts_list_management.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/unix.conf \
 		/usr/lib/qt/mkspecs/common/linux.conf \
@@ -176,9 +180,13 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/yacc.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
 		../Script_Caller/Script_Caller.pro log_write.h \
-		time_manager.h ../Script_Caller/main.c \
+		time_manager.h \
+		scripts_file_reader.h \
+		scripts_list_management.h ../Script_Caller/main.c \
 		../Script_Caller/log_write.c \
-		../Script_Caller/time_manager.c
+		../Script_Caller/time_manager.c \
+		../Script_Caller/scripts_file_reader.c \
+		../Script_Caller/scripts_list_management.c
 QMAKE_TARGET  = Script_Caller
 DESTDIR       = 
 TARGET        = Script_Caller
@@ -488,6 +496,12 @@ log_write.o: ../Script_Caller/log_write.c ../Script_Caller/log_write.h \
 
 time_manager.o: ../Script_Caller/time_manager.c ../Script_Caller/time_manager.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o time_manager.o ../Script_Caller/time_manager.c
+
+scripts_file_reader.o: ../Script_Caller/scripts_file_reader.c ../Script_Caller/scripts_file_reader.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o scripts_file_reader.o ../Script_Caller/scripts_file_reader.c
+
+scripts_list_management.o: ../Script_Caller/scripts_list_management.c ../Script_Caller/scripts_list_management.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o scripts_list_management.o ../Script_Caller/scripts_list_management.c
 
 ####### Install
 

@@ -65,9 +65,9 @@ void start_monitoring(void);
  */
 int main(int argc, char *argv[])
 {
-    //Log_Write(1, "%s\n", "Null parameter reseive");
+    Log_Write(eLogLevel_Info, "%s\n", "Null parameter reseive");
 
-    start_monitoring();
+    //start_monitoring();
 
     return 0;
 }

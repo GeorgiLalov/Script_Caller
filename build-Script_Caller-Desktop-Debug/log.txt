@@ -1,0 +1,2 @@
+Wed Jun 14 16:56:34 2017 :: log level ERROR :: Null parameter reseive
+Wed Jun 14 16:57:18 2017 :: log level INFO :: Null parameter reseive
