@@ -20,6 +20,10 @@
 //! Append writing mode to file.
 #define APPEND_MODE                  "a"
 
+//! The format of the time printed in the log file.
+//! Example: Thu Aug 23 14:55:02 2001
+#define TIME_FORMAT                  "%c"
+
 //! Define strings of log levels.
 static char log_level_string[eLogLevel_UpperBound][LOG_ERROR_TYPE_MAX_LENGTH] =
 {
@@ -66,7 +70,8 @@ void Log_Write(const char *fp_fileName,
     {
         //! Get the formatted time.
         TimeManager_GetFormattedTime(formatted_time,
-                                     FORMATTED_TIME_MAX_LENGTH);
+                                     FORMATTED_TIME_MAX_LENGTH,
+                                     TIME_FORMAT);
 
         //! Format the destination log and append to file.
         fprintf(pFileForWriting, "%s :: log level %s :: (in file:%s func:%s line:%d) %s",

@@ -12,7 +12,8 @@ typedef struct
 } tsTimeInfo;
 
 tsTimeInfo TimeManager_GetCurrentTime(void);
-void TimeManager_GetFormattedTime(char *fp_dest_time,
-                                  int  fp_buffer_size);
+void       TimeManager_GetFormattedTime(char       *fp_dest_time,
+                                        const int  fp_buffer_size,
+                                        const char *fp_time_format);
 
 #endif // TIME_MANAGER_H

@@ -4,10 +4,6 @@
 
 #include "time_manager.h"
 
-//! The format of the time printed in the log file.
-//! Example: Thu Aug 23 14:55:02 2001
-#define TIME_FORMAT    "%c"
-
 
 /**
  * @brief Getting the current time.
@@ -49,10 +45,18 @@ tsTimeInfo TimeManager_GetCurrentTime(void)
     return sRetTimeInfo;
 }
 
-void TimeManager_GetFormattedTime(char *fp_dest_time,
-                                  int  fp_buffer_size)
+/**
+ * @brief Get time in specific format.
+ * @param fp_dest_time      The string where formatted time
+ *                          will be saved.
+ * @param fp_buffer_size    The size of destination time.
+ * @param fp_time_format    The requested format of the time.
+ */
+void TimeManager_GetFormattedTime(char       *fp_dest_time,
+                                  const int  fp_buffer_size,
+                                  const char *fp_time_format)
 {
-    struct tm  *pTimeinfo   = NULL;
+    struct tm *pTimeinfo = NULL;
 
     //! Get the current info.
     pTimeinfo = fs_getCurrentTime();
@@ -61,6 +65,7 @@ void TimeManager_GetFormattedTime(char *fp_dest_time,
     if (pTimeinfo != NULL)
     {
         //! Format the time.
-        strftime(fp_dest_time, fp_buffer_size, TIME_FORMAT, pTimeinfo);
+        strftime(fp_dest_time, fp_buffer_size,
+                 fp_time_format, pTimeinfo);
     }
 }
