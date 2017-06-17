@@ -159,16 +159,26 @@ tsScriptData Reader_GetNextScript(void)
 
         //! Decrease the unreaded count.
         fs_unreadedScriptsCount--;
-
-        //! If there are no more readings expected.
-        if (fs_unreadedScriptsCount == 0)
-        {
-            //! Close the file stream.
-            fclose(fs_pFileForReading);
-        }
     }
 
     //! Return the script data.
     return sScriptData;
 }
 
+/**
+ * @brief Close the stream to the file.
+ */
+void Reader_CloseStream(void)
+{
+    if (fs_pFileForReading == NULL)
+    {
+        LOG_WRITE(eLogLevel_Warning, "%s",
+                  "Trying to close the file stream with null stream pointer");
+    }
+    else
+    {
+        //! Close the file stream.
+        fclose(fs_pFileForReading);
+    }
+
+}

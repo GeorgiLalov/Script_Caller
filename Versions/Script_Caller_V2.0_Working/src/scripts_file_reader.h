@@ -20,6 +20,6 @@ typedef struct
 
 int          Reader_GetScriptsCount(void);
 tsScriptData Reader_GetNextScript(void);
-
+void         Reader_CloseStream(void);
 
 #endif // SCRIPTS_FILE_READER_H

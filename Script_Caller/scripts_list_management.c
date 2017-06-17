@@ -73,6 +73,9 @@ int ScriptsList_Init(void)
         }
     }
 
+    //! Close the file stream.
+    Reader_CloseStream();
+
     return returnValue;
 }
 
