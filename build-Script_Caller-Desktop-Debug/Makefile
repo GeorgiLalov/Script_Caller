@@ -53,13 +53,15 @@ SOURCES       = ../Script_Caller/main.c \
 		../Script_Caller/time_manager.c \
 		../Script_Caller/scripts_file_reader.c \
 		../Script_Caller/scripts_list_management.c \
-		../Script_Caller/script_executioner.c 
+		../Script_Caller/script_executioner.c \
+		../Script_Caller/monitor.c 
 OBJECTS       = main.o \
 		log_write.o \
 		time_manager.o \
 		scripts_file_reader.o \
 		scripts_list_management.o \
-		script_executioner.o
+		script_executioner.o \
+		monitor.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/unix.conf \
 		/usr/lib/qt/mkspecs/common/linux.conf \
@@ -185,12 +187,14 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		time_manager.h \
 		scripts_file_reader.h \
 		scripts_list_management.h \
-		script_executioner.h ../Script_Caller/main.c \
+		script_executioner.h \
+		monitor.h ../Script_Caller/main.c \
 		../Script_Caller/log_write.c \
 		../Script_Caller/time_manager.c \
 		../Script_Caller/scripts_file_reader.c \
 		../Script_Caller/scripts_list_management.c \
-		../Script_Caller/script_executioner.c
+		../Script_Caller/script_executioner.c \
+		../Script_Caller/monitor.c
 QMAKE_TARGET  = Script_Caller
 DESTDIR       = 
 TARGET        = Script_Caller
@@ -513,8 +517,15 @@ scripts_list_management.o: ../Script_Caller/scripts_list_management.c ../Script_
 		../Script_Caller/scripts_file_reader.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o scripts_list_management.o ../Script_Caller/scripts_list_management.c
 
-script_executioner.o: ../Script_Caller/script_executioner.c ../Script_Caller/script_executioner.h
+script_executioner.o: ../Script_Caller/script_executioner.c ../Script_Caller/script_executioner.h \
+		../Script_Caller/log_write.h \
+		../Script_Caller/time_manager.h \
+		../Script_Caller/scripts_file_reader.h \
+		../Script_Caller/scripts_list_management.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o script_executioner.o ../Script_Caller/script_executioner.c
+
+monitor.o: ../Script_Caller/monitor.c ../Script_Caller/monitor.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o monitor.o ../Script_Caller/monitor.c
 
 ####### Install
 
