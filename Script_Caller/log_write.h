@@ -15,9 +15,9 @@
 typedef enum
 {
     eLogLevel_Info       = 0,
-    eLogLevel_Error      = 1,
-    eLogLevel_Issue      = 2,
-    eLogLevel_Fatal      = 3,
+    eLogLevel_Warning    = 1,
+    eLogLevel_Error      = 2,
+    eLogLevel_Issue      = 3,
 
     eLogLevel_UpperBound = 4
 } teLogLevel;

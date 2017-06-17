@@ -28,9 +28,9 @@
 static char log_level_string[eLogLevel_UpperBound][LOG_ERROR_TYPE_MAX_LENGTH] =
 {
     { "INFO" },
+    { "WARNING" },
     { "ERROR" },
-    { "ISSUE" },
-    { "FATAL" }
+    { "ISSUE" }
 };
 
 /**

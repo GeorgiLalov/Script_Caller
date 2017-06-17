@@ -34,7 +34,7 @@ tsTimeInfo TimeManager_GetCurrentTime(void)
     pTimeinfo = fs_getCurrentTime();
 
     //! If getting current time not failed.
-    if (pTimeinfo == NULL)
+    if (pTimeinfo != NULL)
     {
         //! Get what needed for the struct.
         sRetTimeInfo.hours = pTimeinfo->tm_hour;

@@ -10,9 +10,13 @@ static int          fs_scriptsCount = 0;
 /**
  * @brief Read from file with scripts and init
  *        the list with scripts
+ *
+ * @retval 0  - If init was successful.
+ *         -1 - On error.
  */
-void ScriptsList_Init(void)
+int ScriptsList_Init(void)
 {
+    int returnValue = 0;
     int scriptIndex = 0;
     
     //! Read the scripts count from the file with scripts.
@@ -24,13 +28,16 @@ void ScriptsList_Init(void)
         LOG_WRITE(eLogLevel_Error, 
                   "Invalid scripts count readed, fs_scriptsCount %d", 
                   fs_scriptsCount);
+
+        //! Return error.
+        returnValue = -1;
     }
     else
     {
         //! If there are more scripts in file that is allowed to.
         if (fs_scriptsCount > MAX_COUNT_OF_SCRIPTS)
         {
-             LOG_WRITE(eLogLevel_Info, 
+             LOG_WRITE(eLogLevel_Warning,
                        "Total count of scripts in file is %d, allowed count of scripts is %d,"
                        " only the allowed will be added to the list",
                        fs_scriptsCount, MAX_COUNT_OF_SCRIPTS);
@@ -46,6 +53,9 @@ void ScriptsList_Init(void)
         if (fs_scriptsHead == NULL)
         {
             LOG_WRITE(eLogLevel_Error, "%s", "Error allocating memory for all scripts");
+
+            //! Return error.
+            returnValue = -1;
         }
         else
         {
@@ -62,30 +72,29 @@ void ScriptsList_Init(void)
             }  
         }
     }
+
+    return returnValue;
 }
 
 /**
  * @brief Free the memory allocated by the list.
  */
- //! TODO: Maybe use getCount and GetNext?
 void ScriptsList_Destroy(void)
 {
-    int scriptIndex = 0;
-    
     //! If scripts head is NULL.
     if (fs_scriptsHead == NULL)
     {
-        //! TODO: Warning here, not error maybe.
-        LOG_WRITE(eLogLevel_Error, "%s", "Trying to destroy list with null head");
+        LOG_WRITE(eLogLevel_Warning, "%s",
+                  "Trying to destroy list with null head");
     }
     else
     {
-        //! For each script in the list.
-        for (scriptIndex = 0; scriptIndex < fs_scriptsCount; scriptIndex++)
-        {
-            //! Deallocate the memory for the script.
-            free(&(fs_scriptsHead[scriptIndex]));
-        }
+        //! Free the memory.
+        free(fs_scriptsHead);
+
+        //! Reset the static variables.
+        fs_scriptsHead  = NULL;
+        fs_scriptsCount = 0;
     }
 }
 
@@ -123,7 +132,7 @@ tsScriptData* ScriptsList_GetByIndex(int fp_scriptIndex)
     else
     {
         //! Access the script by index.
-        retScript = &(fs_scriptsHead[fp_scriptIndex]);
+        retScript = (fs_scriptsHead + fp_scriptIndex);
     }
 
     return retScript;
